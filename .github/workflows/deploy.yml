@@ -53,7 +53,7 @@ jobs:
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: |
-          poetry run mike deploy --update-aliases ${{ env.VERSION }} latest --push
-          poetry run mike set-default latest --push
+          poetry run mike deploy --push --update-aliases ${{ env.VERSION }} latest
+          poetry run mike set-default --push latest
 
 
