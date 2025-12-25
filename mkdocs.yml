@@ -10,22 +10,21 @@ copyright: Copyright &copy; 2025 OpenEV Data Contributors
 
 theme:
   name: material
-  custom_dir: overrides
-  logo: assets/logo.svg
-  favicon: assets/favicon.png
+  logo: assets/images/logo.svg
+  favicon: assets/images/logo.png
   palette:
-    - scheme: default
-      primary: blue
-      accent: light blue
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
     - scheme: slate
-      primary: blue
-      accent: light blue
+      primary: black
+      accent: amber
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+    - scheme: default
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
   font:
     text: Roboto
     code: Roboto Mono
