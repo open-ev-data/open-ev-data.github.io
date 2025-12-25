@@ -1,0 +1,167 @@
+site_name: OpenEV Data
+site_url: https://open-ev-data.github.io
+site_description: The single source of truth for electric vehicle specifications
+site_author: OpenEV Data Contributors
+repo_url: https://github.com/open-ev-data
+repo_name: open-ev-data
+edit_uri: ""
+
+copyright: Copyright &copy; 2025 OpenEV Data Contributors
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/logo.svg
+  favicon: assets/favicon.png
+  palette:
+    - scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    - announce.dismiss
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra:
+  version:
+    provider: mike
+    default: latest
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/open-ev-data
+      name: OpenEV Data on GitHub
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
+  - redirects:
+      redirect_maps: {}
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      permalink_title: Anchor link to this section for reference
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Overview: getting-started/index.md
+    - Quick Start: getting-started/quick-start.md
+    - Installation: getting-started/installation.md
+  - Documentation:
+    - Architecture: documentation/architecture.md
+    - Dataset:
+      - Overview: documentation/dataset/index.md
+      - Schema Reference: documentation/dataset/schema.md
+      - Data Structure: documentation/dataset/architecture.md
+    - API:
+      - Overview: documentation/api/index.md
+      - Architecture: documentation/api/architecture.md
+      - Endpoints: documentation/api/endpoints.md
+      - Rust Guidelines: documentation/api/rust-guidelines.md
+  - Guides:
+    - Contributing: guides/contributing.md
+    - Adding a Vehicle: guides/adding-vehicle.md
+    - Data Quality Standards: guides/data-quality.md
+    - Development Setup: guides/development-setup.md
+  - Reference:
+    - Charging Standards: reference/charging-standards.md
+    - Units and Conventions: reference/units.md
+    - Data Sources: reference/sources.md
+  - About:
+    - Roadmap: about/roadmap.md
+    - License: about/license.md
+    - Code of Conduct: about/code-of-conduct.md
+

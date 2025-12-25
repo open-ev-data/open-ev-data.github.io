@@ -1,0 +1,61 @@
+# OpenEV Data Documentation
+
+Welcome to the repository for the website that holds the documentation of OpenEV Data. This site is built using MkDocs, a static site generator for displaying markdown documentation. If you're looking to make modifications or simply set it up locally, here's what you need to know.
+
+## Prerequisites
+
+* **Python**: 3.13+ is required <https://www.python.org/>
+* **Poetry**: Used for consistent dependency management <https://python-poetry.org/>
+
+## Local Setup
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/open-ev-data/open-ev-data.github.io.git && cd open-ev-data.github.io
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   poetry install
+   ```
+
+3. **Serve the Website Locally**:
+   ```bash
+   poetry run mkdocs serve
+   ```
+   This will start a local server, and you can access the site at `http://localhost:8000`.
+
+## Making Changes
+
+### Markdown
+
+MkDocs uses Markdown for content. If you're new to Markdown, here's a [quick guide](https://www.markdownguide.org/basic-syntax/).
+
+### Adjusting Site Content
+
+If you want to add a new page, you can create a new markdown file in the `/docs` directory. To make the page visible in the navigation, add it in the `mkdocs.yml` file under the `nav` section. Take a look at the other markdown files for examples. Ideally add some frontmatter for at least the title to stay consistent.
+
+### Customizing Appearance
+
+We use the Material for MkDocs theme. In the file `docs/assets/stylesheets/extra.css` you can find all the customizations and add to them. This file basically overrides the default styling.
+
+## Deployment
+
+This site uses GitHub Actions to publish the newest version. Simply merge to the main branch and the CI pipeline will do the rest. We followed these docs to run the pipeline: <https://squidfunk.github.io/mkdocs-material/publishing-your-site/>
+
+When the pipeline is done, you should see the new version at <https://open-ev-data.github.io>
+
+### Versioning
+
+As our project runs through different versions, we want to also keep the documentation versioned accordingly. For this we use mike which tracks the documentation associated with different versions.
+
+MkDocs has support for this via its extras. The deployment process should take care of this automatically, triggered by pushing a tag with `v*.*.*` for a semantic version update. This means, when updating docs for the current version, you must push a tag to GitHub to trigger a new deployment. If you just update the patch version, the overall version (major, minor) will stay the same on the doc.
+
+## About
+
+Open-source documentation for OpenEV Data - the single source of truth for electric vehicle specifications.
+
+## License
+
+This documentation is licensed under CC-BY 4.0.
+
