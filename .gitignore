@@ -26,5 +26,4 @@ venv/
 ENV/
 env/
 .poetry/
-poetry.lock
 
