@@ -1,64 +1,59 @@
-name: Deploy Documentation
+name: Deploy MkDocs Page with Mike
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Fetch gh-pages Branch
+        run: |
+          git fetch origin gh-pages --depth=1
+          git branch gh-pages origin/gh-pages
+
+      - name: Install Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          version: latest
-          virtualenvs-create: true
-          virtualenvs-in-project: true
+        run: pip install poetry
 
-      - name: Load cached dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/pyproject.toml') }}
+      - name: Install Dependencies
+        run: poetry install --no-root
 
-      - name: Install dependencies
-        run: poetry install --no-interaction
-
-      - name: Configure Git
+      - name: Extract Version
+        id: version
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          TAG=${GITHUB_REF##*/}
+          VERSION=$(echo $TAG | sed -E 's/^v([0-9]+\.[0-9]+)\.[0-9]+$/\1.x/')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Deploy to GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Deploy MkDocs using Mike
+        env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: |
-          poetry run mike deploy --push --update-aliases latest
-          poetry run mike set-default --push latest
+          poetry run mike deploy --update-aliases ${{ env.VERSION }} latest --push
+          poetry run mike set-default latest --push
 
-      - name: Build documentation (PR preview)
-        if: github.event_name == 'pull_request'
-        run: poetry run mkdocs build
 

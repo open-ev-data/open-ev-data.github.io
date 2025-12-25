@@ -41,15 +41,41 @@ We use the Material for MkDocs theme. In the file `docs/assets/stylesheets/extra
 
 ## Deployment
 
-This site uses GitHub Actions to publish the newest version. Simply merge to the main branch and the CI pipeline will do the rest. We followed these docs to run the pipeline: <https://squidfunk.github.io/mkdocs-material/publishing-your-site/>
+This site uses GitHub Actions to publish documentation versions. The deployment is triggered by pushing semantic version tags (e.g., `v1.0.0`).
 
-When the pipeline is done, you should see the new version at <https://open-ev-data.github.io>
+### Automatic Deployment
+
+When you push a tag with `v*.*.*` format:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+The pipeline will:
+1. Extract the version (e.g., v1.0.0 → 1.0.x)
+2. Deploy documentation with that version
+3. Update the `latest` alias
+4. Set `latest` as default
+
+### Manual Deployment
+
+You can also trigger deployment manually from the GitHub Actions tab using the "workflow_dispatch" option.
 
 ### Versioning
 
-As our project runs through different versions, we want to also keep the documentation versioned accordingly. For this we use mike which tracks the documentation associated with different versions.
+The project uses [mike](https://github.com/jimporter/mike) for documentation versioning:
 
-MkDocs has support for this via its extras. The deployment process should take care of this automatically, triggered by pushing a tag with `v*.*.*` for a semantic version update. This means, when updating docs for the current version, you must push a tag to GitHub to trigger a new deployment. If you just update the patch version, the overall version (major, minor) will stay the same on the doc.
+- **Patch versions** (v1.0.1, v1.0.2) map to the same minor version (1.0.x)
+- **Minor versions** (v1.1.0, v1.2.0) create new documentation versions (1.1.x, 1.2.x)
+- **Latest** alias always points to the most recent version
+
+Example:
+- `v1.0.0`, `v1.0.1`, `v1.0.2` → All deploy to version `1.0.x`
+- `v1.1.0` → Creates new version `1.1.x`
+- `v2.0.0` → Creates new version `2.0.x`
+
+When the pipeline completes, view the documentation at <https://open-ev-data.github.io>
 
 ## About
 
