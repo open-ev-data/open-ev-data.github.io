@@ -28,8 +28,8 @@ jobs:
 
       - name: Fetch gh-pages Branch
         run: |
-          git fetch origin gh-pages --depth=1
-          git branch gh-pages origin/gh-pages
+          git fetch origin gh-pages --depth=1 || echo "gh-pages branch does not exist yet"
+          git branch gh-pages origin/gh-pages 2>/dev/null || echo "Creating new gh-pages branch"
 
       - name: Install Python
         uses: actions/setup-python@v5
@@ -45,9 +45,15 @@ jobs:
       - name: Extract Version
         id: version
         run: |
-          TAG=${GITHUB_REF##*/}
-          VERSION=$(echo $TAG | sed -E 's/^v([0-9]+\.[0-9]+)\.[0-9]+$/\1.x/')
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          if [ "${{ github.ref_type }}" == "tag" ]; then
+            TAG=${GITHUB_REF##*/}
+            VERSION=$(echo $TAG | sed -E 's/^v([0-9]+\.[0-9]+)\.[0-9]+$/\1.x/')
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+            echo "Deploying version: $VERSION"
+          else
+            echo "VERSION=dev" >> $GITHUB_ENV
+            echo "Deploying development version"
+          fi
 
       - name: Deploy MkDocs using Mike
         env:
