@@ -5,6 +5,7 @@ description = "Documentation for OpenEV Data"
 authors = ["OpenEV Data Contributors"]
 readme = "README.md"
 license = "CC-BY-4.0"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
