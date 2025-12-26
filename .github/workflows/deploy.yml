@@ -12,6 +12,9 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://open-ev-data.github.io
     permissions:
       contents: write
 
@@ -60,7 +63,7 @@ jobs:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: |
           poetry run mike delete latest || true
-          poetry run mike deploy --update-aliases ${{ env.VERSION }} latest
+          poetry run mike deploy --update-aliases ${VERSION} latest
           poetry run mike set-default latest
           git push origin gh-pages
 
