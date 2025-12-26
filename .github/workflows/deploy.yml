@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - 'v*.*.*'
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -48,20 +47,16 @@ jobs:
       - name: Extract Version
         id: version
         run: |
-          if [ "${{ github.ref_type }}" == "tag" ]; then
-            TAG=${GITHUB_REF##*/}
-            VERSION=$(echo $TAG | sed -E 's/^v([0-9]+\.[0-9]+)\.[0-9]+$/\1.x/')
-            echo "VERSION=$VERSION" >> $GITHUB_ENV
-            echo "Deploying version: $VERSION"
-          else
-            echo "VERSION=dev" >> $GITHUB_ENV
-            echo "Deploying development version"
-          fi
+          TAG=${GITHUB_REF##*/}
+          VERSION=$(echo $TAG | sed -E 's/^v([0-9]+\.[0-9]+)\.[0-9]+$/\1.x/')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Deploying version: $VERSION"
 
       - name: Deploy MkDocs using Mike
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: |
+          poetry run mike delete dev || true
           poetry run mike delete latest || true
           poetry run mike deploy --update-aliases ${VERSION} latest
           poetry run mike set-default latest
