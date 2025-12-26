@@ -5,7 +5,7 @@ title: OpenEV Data
 # Welcome to OpenEV Data
 
 <div style="text-align: center; margin: 3rem 0;">
-  <img src="assets/images/logo.svg" alt="OpenEV Data Logo" style="max-width: 400px; width: 100%;" />
+  <img src="assets/images/open-ev-data-logo.svg" alt="OpenEV Data Logo" style="max-width: 400px; width: 100%;" />
 </div>
 
 <div class="grid cards" markdown>

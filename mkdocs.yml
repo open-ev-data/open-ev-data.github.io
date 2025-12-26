@@ -10,8 +10,8 @@ copyright: Copyright &copy; 2025 OpenEV Data Contributors
 
 theme:
   name: material
-  logo: assets/images/logo.svg
-  favicon: assets/images/logo.png
+  logo: assets/images/open-ev-data-logo.svg
+  favicon: assets/images/open-ev-data-logo.png
   palette:
     - scheme: slate
       primary: black
