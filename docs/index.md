@@ -53,17 +53,21 @@ OpenEV Data develops and maintains the world's most accurate open database of El
     
     Learn how to use the dataset or API
 
+-   [**Project Governance →**](governance/index.md)
+    
+    Learn about project structure and policies
+
+-   [**API Documentation →**](api/index.md)
+    
+    Explore the REST API documentation
+
+-   [**Dataset Documentation →**](dataset/index.md)
+    
+    Learn about the EV dataset structure
+
 -   [**Contribute →**](guides/contributing.md)
     
     Help improve the database
-
--   [**API Reference →**](documentation/api/endpoints.md)
-    
-    Integrate OpenEV into your app
-
--   [**View Dataset →**](https://github.com/open-ev-data/open-ev-data-dataset)
-    
-    Browse the raw data
 
 </div>
 

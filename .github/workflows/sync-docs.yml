@@ -1,0 +1,106 @@
+name: Sync Documentation
+
+on:
+  repository_dispatch:
+    types:
+      - sync-api-docs
+      - sync-dataset-docs
+      - sync-governance-docs
+
+permissions:
+  contents: write
+
+jobs:
+  sync-docs:
+    name: Sync Documentation from ${{ github.event.client_payload.source }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Website Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Checkout Source Repository (API/Dataset)
+        if: github.event.client_payload.source != 'governance'
+        uses: actions/checkout@v4
+        with:
+          repository: open-ev-data/open-ev-data-${{ github.event.client_payload.source }}
+          ref: ${{ github.event.client_payload.sha }}
+          path: source-repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout Source Repository (Governance)
+        if: github.event.client_payload.source == 'governance'
+        uses: actions/checkout@v4
+        with:
+          repository: open-ev-data/.github
+          ref: ${{ github.event.client_payload.sha }}
+          path: source-repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync API Documentation
+        if: github.event.client_payload.source == 'api'
+        run: |
+          mkdir -p docs/api
+          
+          cp source-repo/README.md docs/api/index.md
+          
+          cp source-repo/docs/GET_STARTED.md docs/api/
+          cp source-repo/docs/ARCHITECTURE.md docs/api/
+          cp source-repo/docs/TESTING.md docs/api/
+          cp source-repo/docs/RUST_GUIDELINES.md docs/api/
+          cp source-repo/docs/RELEASE_STRATEGY.md docs/api/
+          cp source-repo/docs/API_ERRORS.md docs/api/
+          cp source-repo/docs/PROBLEM_DETAILS_RFC_7807.md docs/api/
+          cp source-repo/docs/CRATE_EV_CORE.md docs/api/
+          cp source-repo/docs/CRATE_EV_ETL.md docs/api/
+          cp source-repo/docs/CRATE_EV_SERVER.md docs/api/
+          
+          cp source-repo/CHANGELOG.md docs/changelog-api.md
+
+      - name: Sync Dataset Documentation
+        if: github.event.client_payload.source == 'dataset'
+        run: |
+          mkdir -p docs/dataset
+          
+          cp source-repo/README.md docs/dataset/index.md
+          
+          cp source-repo/docs/HOW_TO_CONSUME.md docs/dataset/
+          cp source-repo/docs/ARCHITECTURE.md docs/dataset/
+          cp source-repo/docs/SCHEMA.md docs/dataset/
+          cp source-repo/docs/RELEASE_PROCESS.md docs/dataset/
+          
+          cp source-repo/CHANGELOG.md docs/changelog-dataset.md
+
+      - name: Sync Governance Documentation
+        if: github.event.client_payload.source == 'governance'
+        run: |
+          mkdir -p docs/governance
+          
+          cp source-repo/README.md docs/governance/index.md
+          cp source-repo/GET_STARTED.md docs/governance/GET_STARTED.md
+          cp source-repo/CONTRIBUTING.md docs/governance/CONTRIBUTING.md
+          cp source-repo/CODE_OF_CONDUCT.md docs/governance/CODE_OF_CONDUCT.md
+
+      - name: Commit and Push Changes
+        run: |
+          git add docs/
+          if git diff --staged --quiet; then
+            echo "No documentation changes detected"
+            exit 0
+          fi
+          
+          SOURCE="${{ github.event.client_payload.source }}"
+          VERSION="${{ github.event.client_payload.version }}"
+          
+          git commit -m "docs($SOURCE): sync documentation from $SOURCE@$VERSION"
+          git push origin main
+          
+          echo "✅ Documentation synchronized from $SOURCE"
+

@@ -374,13 +374,13 @@ export PATH=~/.npm-global/bin:$PATH
     
     Make your first contribution
 
--   [**Development Setup**](../guides/development-setup.md)
+-   [**Project Setup**](../governance/GET_STARTED.md)
     
     Complete development environment
 
--   [**Architecture Overview**](../documentation/architecture.md)
+-   [**API Documentation**](../api/index.md)
     
-    Understand the system
+    Explore the API
 
 </div>
 

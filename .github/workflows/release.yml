@@ -1,0 +1,110 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Sync Documentation"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get Latest API Version
+        id: api_version
+        run: |
+          API_VERSION=$(gh api repos/open-ev-data/open-ev-data-api/releases/latest --jq '.tag_name')
+          echo "api_version=$API_VERSION" >> $GITHUB_OUTPUT
+          echo "API Version: $API_VERSION"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Latest Website Doc Version
+        id: doc_version
+        run: |
+          API_VERSION="${{ steps.api_version.outputs.api_version }}"
+          
+          # Get all tags that match the API version pattern
+          DOC_TAGS=$(git tag -l "${API_VERSION}.doc.*" | sort -V)
+          
+          if [ -z "$DOC_TAGS" ]; then
+            # No doc version exists for this API version yet
+            DOC_NUMBER=1
+          else
+            # Get the last doc version and increment
+            LAST_TAG=$(echo "$DOC_TAGS" | tail -n 1)
+            LAST_NUMBER=$(echo "$LAST_TAG" | sed -n 's/.*\.doc\.\([0-9]*\)/\1/p')
+            DOC_NUMBER=$((LAST_NUMBER + 1))
+          fi
+          
+          NEW_VERSION="${API_VERSION}.doc.${DOC_NUMBER}"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "doc_number=$DOC_NUMBER" >> $GITHUB_OUTPUT
+          echo "New Version: $NEW_VERSION"
+
+      - name: Generate Release Notes
+        id: release_notes
+        run: |
+          API_VERSION="${{ steps.api_version.outputs.api_version }}"
+          DOC_NUMBER="${{ steps.doc_version.outputs.doc_number }}"
+          NEW_VERSION="${{ steps.doc_version.outputs.new_version }}"
+          
+          # Get commits since last doc release
+          LAST_TAG=$(git tag -l "${API_VERSION}.doc.*" | sort -V | tail -n 1)
+          
+          if [ -z "$LAST_TAG" ]; then
+            # First doc release for this API version
+            COMMITS=$(git log --pretty=format:"- %s (%h)" -10)
+            NOTES="# Documentation ${NEW_VERSION}
+
+This is the first documentation release for API version ${API_VERSION}.
+
+## Recent Changes
+${COMMITS}
+
+---
+**API Version:** ${API_VERSION}
+**Documentation Revision:** ${DOC_NUMBER}"
+          else
+            # Get changes since last doc version
+            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s (%h)")
+            NOTES="# Documentation ${NEW_VERSION}
+
+Documentation update for API version ${API_VERSION}.
+
+## Changes Since ${LAST_TAG}
+${COMMITS}
+
+---
+**API Version:** ${API_VERSION}
+**Documentation Revision:** ${DOC_NUMBER}"
+          fi
+          
+          # Save to file
+          echo "$NOTES" > release_notes.md
+          echo "notes_file=release_notes.md" >> $GITHUB_OUTPUT
+
+      - name: Create Release and Tag
+        run: |
+          NEW_VERSION="${{ steps.doc_version.outputs.new_version }}"
+          
+          gh release create "$NEW_VERSION" \
+            --title "Documentation $NEW_VERSION" \
+            --notes-file release_notes.md
+          
+          echo "✅ Created release $NEW_VERSION"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+

@@ -232,21 +232,21 @@ src/
 
 <div class="grid cards" markdown>
 
--   [**Read the Documentation**](../documentation/architecture.md)
+-   [**API Documentation**](../api/index.md)
     
-    Understand the full architecture
+    Complete API reference
 
--   [**API Reference**](../documentation/api/endpoints.md)
+-   [**Dataset Documentation**](../dataset/index.md)
     
-    Complete endpoint documentation
+    Learn about the dataset structure
 
 -   [**Contributing Guide**](../guides/contributing.md)
     
     Help improve the database
 
--   [**Schema Reference**](../documentation/dataset/schema.md)
+-   [**Project Setup**](../governance/GET_STARTED.md)
     
-    Detailed field documentation
+    Complete development environment setup
 
 </div>
 

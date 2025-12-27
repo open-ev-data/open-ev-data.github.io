@@ -11,10 +11,10 @@ Thank you for your interest in contributing to OpenEV Data! This project aims to
 
 ## Quick Links
 
-- [Code of Conduct](../about/code-of-conduct.md)
-- [Development Setup](development-setup.md)
-- [Data Quality Standards](data-quality.md)
-- [Adding a Vehicle](adding-vehicle.md)
+- [Code of Conduct](../governance/CODE_OF_CONDUCT.md)
+- [Project Setup](../governance/GET_STARTED.md)
+- [API Documentation](../api/index.md)
+- [Dataset Documentation](../dataset/index.md)
 
 ## Ways to Contribute
 
@@ -24,7 +24,7 @@ Thank you for your interest in contributing to OpenEV Data! This project aims to
     
     Help expand the database by adding specifications for new EVs:
     
-    1. Read the [Adding a Vehicle](adding-vehicle.md) guide
+    1. Read the [Dataset Documentation](../dataset/index.md)
     2. Gather reliable sources
     3. Follow the schema structure
     4. Submit a pull request
@@ -57,8 +57,8 @@ Thank you for your interest in contributing to OpenEV Data! This project aims to
     Enhance the API, ETL pipeline, or tooling:
     
     1. Check [open issues](https://github.com/open-ev-data/open-ev-data-api/issues)
-    2. Read the [API Architecture](../documentation/api/architecture.md)
-    3. Follow [Rust Guidelines](../documentation/api/rust-guidelines.md)
+    2. Read the [API Architecture](../api/ARCHITECTURE.md)
+    3. Follow [Rust Guidelines](../api/RUST_GUIDELINES.md)
     4. Submit a pull request
     
     **Requirements**:
@@ -88,13 +88,14 @@ Thank you for your interest in contributing to OpenEV Data! This project aims to
 
 Before contributing, familiarize yourself with:
 
-- [Architecture Overview](../documentation/architecture.md)
-- [Dataset Schema](../documentation/dataset/schema.md)
-- [Data Quality Standards](data-quality.md)
+- [Project Setup](../governance/GET_STARTED.md)
+- [API Architecture](../api/ARCHITECTURE.md)
+- [Dataset Schema](../dataset/SCHEMA.md)
+- [Contributing Guidelines](../governance/CONTRIBUTING.md)
 
 ### 2. Set Up Your Environment
 
-Follow the [Development Setup](development-setup.md) guide to configure your local environment.
+Follow the [Project Setup Guide](../governance/GET_STARTED.md), [API Getting Started](../api/GET_STARTED.md) or [Dataset Documentation](../dataset/index.md) guide to configure your local environment.
 
 ### 3. Find Something to Work On
 
@@ -114,9 +115,9 @@ Browse issues with the `good-first-issue` label:
 
 Follow the specific guides:
 
-- [Adding a Vehicle](adding-vehicle.md)
-- [Data Quality Standards](data-quality.md)
-- [Rust Guidelines](../documentation/api/rust-guidelines.md)
+- [Dataset Documentation](../dataset/index.md)
+- [API Documentation](../api/index.md)
+- [Rust Guidelines](../api/RUST_GUIDELINES.md)
 
 ### 5. Submit a Pull Request
 
@@ -337,13 +338,13 @@ Include sources from:
 - Update when new information available
 - Note regional variations
 
-Read the complete [Data Quality Standards](data-quality.md) guide.
+Read the complete [Data Quality Standards](../governance/CONTRIBUTING.md) guide.
 
 ## Community Guidelines
 
 ### Code of Conduct
 
-We are committed to providing a welcoming and inclusive environment. Read our [Code of Conduct](../about/code-of-conduct.md).
+We are committed to providing a welcoming and inclusive environment. Read our [Code of Conduct](../governance/CODE_OF_CONDUCT.md).
 
 ### Communication
 
@@ -375,7 +376,7 @@ By contributing, you agree that your contributions will be licensed under:
 - **API/Code**: Apache License 2.0
 - **Documentation**: CC-BY 4.0
 
-See [License](../about/license.md) for details.
+See [License Information](../governance/index.md) for details.
 
 ## Get Help
 
@@ -389,19 +390,19 @@ Need assistance?
 
 <div class="grid cards" markdown>
 
--   [**Development Setup**](development-setup.md)
+-   [**Project Setup**](../governance/GET_STARTED.md)
     
-    Configure your environment
+    Complete development environment setup
 
--   [**Adding a Vehicle**](adding-vehicle.md)
+-   [**API Documentation**](../api/index.md)
     
-    Step-by-step guide
+    Learn about the API
 
--   [**Data Quality**](data-quality.md)
+-   [**Dataset Documentation**](../dataset/index.md)
     
-    Quality standards
+    Understand the dataset structure
 
--   [**Code of Conduct**](../about/code-of-conduct.md)
+-   [**Code of Conduct**](../governance/CODE_OF_CONDUCT.md)
     
     Community standards
 

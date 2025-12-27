@@ -26,7 +26,7 @@ Welcome! This guide will help you get started with OpenEV Data, whether you want
     
     3. **Browse the Data**
        - Explore the [dataset repository](https://github.com/open-ev-data/open-ev-data-dataset) structure
-       - Read the [Schema Reference](../documentation/dataset/schema.md)
+       - Read the [Schema Reference](../dataset/SCHEMA.md)
     
     **Next Steps**: [Quick Start →](quick-start.md)
 
@@ -51,7 +51,7 @@ Welcome! This guide will help you get started with OpenEV Data, whether you want
     - Filter and search capabilities
     - Pagination support
     
-    **Next Steps**: [API Reference →](../documentation/api/endpoints.md)
+    **Next Steps**: [API Documentation →](../api/index.md)
 
 === "Contribute"
 
@@ -63,7 +63,7 @@ Welcome! This guide will help you get started with OpenEV Data, whether you want
     
     1. **Add Vehicle Data**
        - Submit specifications for new EVs
-       - Follow the [Adding a Vehicle](../guides/adding-vehicle.md) guide
+       - Check the [Dataset Documentation](../dataset/index.md)
     
     2. **Correct Existing Data**
        - Report inaccuracies
@@ -75,7 +75,7 @@ Welcome! This guide will help you get started with OpenEV Data, whether you want
     
     4. **Develop Features**
        - Work on the API or ETL pipeline
-       - Follow the [Development Setup](../guides/development-setup.md) guide
+       - Check the [API Documentation](../api/index.md)
     
     **Next Steps**: [Contributing Guide →](../guides/contributing.md)
 
@@ -169,7 +169,7 @@ code .github/open-ev-data.code-workspace
 - Consistent settings
 - Organized sidebar
 
-See the [Development Setup](../guides/development-setup.md) guide for details.
+See the [API Getting Started](../api/GET_STARTED.md) or [Project Setup Guide](../governance/GET_STARTED.md) for detailed development setup.
 
 ## Quick Examples
 
@@ -242,17 +242,17 @@ Ready to dive deeper? Here are some recommended paths:
     
     Step-by-step tutorial
 
--   [**Architecture Overview**](../documentation/architecture.md)
+-   [**API Architecture**](../api/ARCHITECTURE.md)
     
-    Understand the system design
+    Understand the API design
 
 -   [**Contributing Guide**](../guides/contributing.md)
     
     Start contributing
 
--   [**API Endpoints**](../documentation/api/endpoints.md)
+-   [**Dataset Documentation**](../dataset/index.md)
     
-    Full API reference
+    Learn about the dataset
 
 </div>
 
@@ -267,6 +267,6 @@ Ready to dive deeper? Here are some recommended paths:
 Join our community:
 
 - Follow development on [GitHub](https://github.com/open-ev-data)
-- Read our [Code of Conduct](../about/code-of-conduct.md)
-- Review our [Roadmap](../about/roadmap.md)
+- Read our [Code of Conduct](../governance/CODE_OF_CONDUCT.md)
+- Check project updates in the [Changelogs](../changelog-api.md)
 
