@@ -82,6 +82,16 @@ jobs:
           poetry run mike delete latest || true
           poetry run mike deploy --update-aliases ${VERSION} latest
           poetry run mike set-default latest
+
+      - name: Copy Google Verification File to Root
+        run: |
+          git checkout gh-pages
+          cp ${VERSION}/googleb888a8ce45bda477.html . || echo "Verification file not found in version, skipping"
+          git add googleb888a8ce45bda477.html
+          git commit -m "chore: add Google verification file to root" || echo "No changes to commit"
+
+      - name: Push Changes
+        run: |
           git push origin gh-pages
 
 
