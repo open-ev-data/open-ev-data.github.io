@@ -120,16 +120,3 @@ jobs:
           echo "✅ Created release $NEW_VERSION"
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-
-      - name: Trigger Deploy Workflow
-        run: |
-          NEW_VERSION="${{ steps.doc_version.outputs.new_version }}"
-          
-          echo "🚀 Triggering deploy workflow for $NEW_VERSION"
-          gh workflow run deploy.yml --ref main --field version="$NEW_VERSION"
-          
-          echo "✅ Deploy workflow triggered"
-        env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-
-
