@@ -5,6 +5,12 @@ on:
     tags:
       - 'v*.*.*'
       - 'v*.*.*.doc.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag to deploy (e.g., v1.2.0.doc.1)'
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -22,6 +28,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref }}
           fetch-depth: 0
 
       - name: Configure Git Credentials
@@ -48,14 +55,15 @@ jobs:
       - name: Extract Version
         id: version
         run: |
-          TAG=${GITHUB_REF##*/}
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.version }}"
+          else
+            TAG=${GITHUB_REF##*/}
+          fi
           
-          # Check if it's a .doc version (e.g., v1.3.2.doc.1)
           if [[ $TAG =~ ^v([0-9]+\.[0-9]+)\.[0-9]+\.doc\.[0-9]+$ ]]; then
-            # Extract major.minor from doc version
             VERSION="${BASH_REMATCH[1]}.x"
           elif [[ $TAG =~ ^v([0-9]+\.[0-9]+)\.[0-9]+$ ]]; then
-            # Extract major.minor from standard version
             VERSION="${BASH_REMATCH[1]}.x"
           else
             echo "Error: Tag format not recognized: $TAG"
