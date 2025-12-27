@@ -111,4 +111,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Trigger Deploy Workflow
+        run: |
+          NEW_VERSION="${{ steps.doc_version.outputs.new_version }}"
+          
+          echo "🚀 Triggering deploy workflow for $NEW_VERSION"
+          gh workflow run deploy.yml --ref "$NEW_VERSION"
+          
+          echo "✅ Deploy workflow triggered"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
