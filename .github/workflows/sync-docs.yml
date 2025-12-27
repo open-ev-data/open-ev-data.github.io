@@ -6,19 +6,57 @@ on:
       - sync-api-docs
       - sync-dataset-docs
       - sync-governance-docs
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Source repository to sync from'
+        required: true
+        type: choice
+        options:
+          - api
+          - dataset
+          - governance
+      ref:
+        description: 'Git ref (branch/tag/commit) to sync from'
+        required: false
+        default: 'main'
+        type: string
 
 permissions:
   contents: write
 
 jobs:
   sync-docs:
-    name: Sync Documentation from ${{ github.event.client_payload.source }}
+    name: Sync Documentation from ${{ github.event_name == 'workflow_dispatch' && inputs.source || github.event.client_payload.source }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
     steps:
+      - name: Set Source Variables
+        id: source
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "source=${{ inputs.source }}" >> $GITHUB_OUTPUT
+            echo "ref=${{ inputs.ref }}" >> $GITHUB_OUTPUT
+            echo "sha=$(git ls-remote https://github.com/open-ev-data/${{ inputs.source == 'governance' && '.github' || format('open-ev-data-{0}', inputs.source) }} ${{ inputs.ref }} | cut -f1)" >> $GITHUB_OUTPUT
+          else
+            echo "source=${{ github.event.client_payload.source }}" >> $GITHUB_OUTPUT
+            echo "ref=${{ github.event.client_payload.ref }}" >> $GITHUB_OUTPUT
+            echo "sha=${{ github.event.client_payload.sha }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
       - name: Checkout Website Repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
           fetch-depth: 0
 
       - name: Configure Git
@@ -27,25 +65,25 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Checkout Source Repository (API/Dataset)
-        if: github.event.client_payload.source != 'governance'
+        if: steps.source.outputs.source != 'governance'
         uses: actions/checkout@v4
         with:
-          repository: open-ev-data/open-ev-data-${{ github.event.client_payload.source }}
-          ref: ${{ github.event.client_payload.sha }}
+          repository: open-ev-data/open-ev-data-${{ steps.source.outputs.source }}
+          ref: ${{ steps.source.outputs.sha }}
           path: source-repo
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Checkout Source Repository (Governance)
-        if: github.event.client_payload.source == 'governance'
+        if: steps.source.outputs.source == 'governance'
         uses: actions/checkout@v4
         with:
           repository: open-ev-data/.github
-          ref: ${{ github.event.client_payload.sha }}
+          ref: ${{ steps.source.outputs.sha }}
           path: source-repo
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Sync API Documentation
-        if: github.event.client_payload.source == 'api'
+        if: steps.source.outputs.source == 'api'
         run: |
           mkdir -p docs/api
           
@@ -65,7 +103,7 @@ jobs:
           cp source-repo/CHANGELOG.md docs/changelog-api.md
 
       - name: Sync Dataset Documentation
-        if: github.event.client_payload.source == 'dataset'
+        if: steps.source.outputs.source == 'dataset'
         run: |
           mkdir -p docs/dataset
           
@@ -79,7 +117,7 @@ jobs:
           cp source-repo/CHANGELOG.md docs/changelog-dataset.md
 
       - name: Sync Governance Documentation
-        if: github.event.client_payload.source == 'governance'
+        if: steps.source.outputs.source == 'governance'
         run: |
           mkdir -p docs/governance
           
@@ -96,8 +134,14 @@ jobs:
             exit 0
           fi
           
-          SOURCE="${{ github.event.client_payload.source }}"
-          VERSION="${{ github.event.client_payload.version }}"
+          SOURCE="${{ steps.source.outputs.source }}"
+          
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            REF="${{ inputs.ref }}"
+            VERSION="$REF"
+          else
+            VERSION="${{ github.event.client_payload.version }}"
+          fi
           
           git commit -m "docs($SOURCE): sync documentation from $SOURCE@$VERSION"
           git push origin main
