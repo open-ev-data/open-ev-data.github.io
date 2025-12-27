@@ -18,16 +18,16 @@ This repository provides a **production-ready REST API** for querying electric v
 ## Documentation
 
 ### Getting Started
-- **[Get Started](GET_STARTED.md)** — Setup, build, run, and test the system
+- **[Get Started](docs/GET_STARTED.md)** — Setup, build, run, and test the system
 
 ### Technical Documentation
-- **[Architecture](ARCHITECTURE.md)** — Hexagonal architecture and design decisions
-- **[Rust Guidelines](RUST_GUIDELINES.md)** — Coding standards and best practices
+- **[Architecture](docs/ARCHITECTURE.md)** — Hexagonal architecture and design decisions
+- **[Rust Guidelines](docs/RUST_GUIDELINES.md)** — Coding standards and best practices
 
 ### Crate Documentation
-- **[ev-core](CRATE_EV_CORE.md)** — Domain types and validation
-- **[ev-etl](CRATE_EV_ETL.md)** — ETL pipeline for data processing
-- **[ev-server](CRATE_EV_SERVER.md)** — REST API server with OpenAPI
+- **[ev-core](docs/CRATE_EV_CORE.md)** — Domain types and validation
+- **[ev-etl](docs/CRATE_EV_ETL.md)** — ETL pipeline for data processing
+- **[ev-server](docs/CRATE_EV_SERVER.md)** — REST API server with OpenAPI
 
 ### Project Governance
 - **[Contributing Guide](https://github.com/open-ev-data/.github/blob/main/CONTRIBUTING.md)** — How to contribute
@@ -70,4 +70,3 @@ See [LICENCE](LICENCE) for full terms.
 ## Acknowledgments
 
 This project is part of the OpenEV Data initiative, providing open, structured, and verifiable EV data. Special thanks to all contributors who help maintain and improve this API.
-
