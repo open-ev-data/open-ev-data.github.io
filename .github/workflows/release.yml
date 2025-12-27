@@ -104,7 +104,7 @@ jobs:
           NEW_VERSION="${{ steps.doc_version.outputs.new_version }}"
           
           gh release create "$NEW_VERSION" \
-            --title "Documentation $NEW_VERSION" \
+            --title "$NEW_VERSION" \
             --notes-file release_notes.md
           
           echo "✅ Created release $NEW_VERSION"
