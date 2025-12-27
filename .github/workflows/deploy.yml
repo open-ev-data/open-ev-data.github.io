@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*.*.*'
+      - 'v*.*.*.doc.*'
 
 permissions:
   contents: write
@@ -48,9 +49,22 @@ jobs:
         id: version
         run: |
           TAG=${GITHUB_REF##*/}
-          VERSION=$(echo $TAG | sed -E 's/^v([0-9]+\.[0-9]+)\.[0-9]+$/\1.x/')
+          
+          # Check if it's a .doc version (e.g., v1.3.2.doc.1)
+          if [[ $TAG =~ ^v([0-9]+\.[0-9]+)\.[0-9]+\.doc\.[0-9]+$ ]]; then
+            # Extract major.minor from doc version
+            VERSION="${BASH_REMATCH[1]}.x"
+          elif [[ $TAG =~ ^v([0-9]+\.[0-9]+)\.[0-9]+$ ]]; then
+            # Extract major.minor from standard version
+            VERSION="${BASH_REMATCH[1]}.x"
+          else
+            echo "Error: Tag format not recognized: $TAG"
+            exit 1
+          fi
+          
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Deploying version: $VERSION"
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "Deploying version: $VERSION (from tag: $TAG)"
 
       - name: Deploy MkDocs using Mike
         env:
