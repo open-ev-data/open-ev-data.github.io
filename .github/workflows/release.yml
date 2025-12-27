@@ -66,34 +66,38 @@ jobs:
           if [ -z "$LAST_TAG" ]; then
             # First doc release for this API version
             COMMITS=$(git log --pretty=format:"- %s (%h)" -10)
-            NOTES="# Documentation ${NEW_VERSION}
-
-This is the first documentation release for API version ${API_VERSION}.
-
-## Recent Changes
-${COMMITS}
-
----
-**API Version:** ${API_VERSION}
-**Documentation Revision:** ${DOC_NUMBER}"
+            
+            cat > release_notes.md <<EOF
+          # Documentation ${NEW_VERSION}
+          
+          This is the first documentation release for API version ${API_VERSION}.
+          
+          ## Recent Changes
+          ${COMMITS}
+          
+          ---
+          **API Version:** ${API_VERSION}
+          **Documentation Revision:** ${DOC_NUMBER}
+          EOF
           else
             # Get changes since last doc version
             COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s (%h)")
-            NOTES="# Documentation ${NEW_VERSION}
-
-Documentation update for API version ${API_VERSION}.
-
-## Changes Since ${LAST_TAG}
-${COMMITS}
-
----
-**API Version:** ${API_VERSION}
-**Documentation Revision:** ${DOC_NUMBER}"
+            
+            cat > release_notes.md <<EOF
+          # Documentation ${NEW_VERSION}
+          
+          Documentation update for API version ${API_VERSION}.
+          
+          ## Changes Since ${LAST_TAG}
+          ${COMMITS}
+          
+          ---
+          **API Version:** ${API_VERSION}
+          **Documentation Revision:** ${DOC_NUMBER}
+          EOF
           fi
           
-          # Save to file
-          echo "$NOTES" > release_notes.md
-          echo "notes_file=release_notes.md" >> $GITHUB_OUTPUT
+          echo "Release notes generated successfully"
 
       - name: Create Release and Tag
         run: |
