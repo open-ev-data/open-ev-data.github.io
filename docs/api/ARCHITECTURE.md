@@ -319,47 +319,47 @@ The project utilizes the **Rust 2024 Edition**. Below is the technology stack fo
 
 ### 5.2. Core Libraries
 
-| Crate          | Version | Usage                                          |
-| -------------- | ------- | ---------------------------------------------- |
-| **serde**      | `1.0`   | Serialization/deserialization framework        |
-| **serde_json** | `1.0`   | JSON parsing and generation                    |
-| **anyhow**     | `1.0`   | Application-level error handling (ETL, Server) |
-| **thiserror**  | `2.0`   | Library-level error definitions (ev-core)      |
+| Crate | Version | Usage |
+| --- | --- | --- |
+| **serde** | `1.0` | Serialization/deserialization framework |
+| **serde_json** | `1.0` | JSON parsing and generation |
+| **anyhow** | `1.0` | Application-level error handling (ETL, Server) |
+| **thiserror** | `2.0` | Library-level error definitions (ev-core) |
 
 ### 5.3. ETL-Specific Libraries
 
-| Crate          | Version | Usage                                |
-| -------------- | ------- | ------------------------------------ |
-| **walkdir**    | `2.5+`  | Recursive directory traversal        |
-| **jsonschema** | `0.25+` | JSON schema validation               |
-| **rusqlite**   | `0.34+` | SQLite database generation           |
-| **postgres**   | `0.19+` | PostgreSQL SQL generation            |
-| **csv**        | `1.3+`  | CSV serialization                    |
-| **quick-xml**  | `0.37+` | XML serialization                    |
-| **rayon**      | `1.10+` | Parallel processing of vehicle files |
+| Crate | Version | Usage |
+| --- | --- | --- |
+| **walkdir** | `2.5+` | Recursive directory traversal |
+| **jsonschema** | `0.25+` | JSON schema validation |
+| **rusqlite** | `0.34+` | SQLite database generation |
+| **postgres** | `0.19+` | PostgreSQL SQL generation |
+| **csv** | `1.3+` | CSV serialization |
+| **quick-xml** | `0.37+` | XML serialization |
+| **rayon** | `1.10+` | Parallel processing of vehicle files |
 
 ### 5.4. Server-Specific Libraries
 
-| Crate                  | Version | Usage                                        |
-| ---------------------- | ------- | -------------------------------------------- |
-| **axum**               | `0.8+`  | Web framework for REST API                   |
-| **tokio**              | `1.42+` | Async runtime                                |
-| **tower**              | `0.5+`  | Middleware and service abstractions          |
-| **tower-http**         | `0.6+`  | HTTP middleware (CORS, compression, tracing) |
-| **rusqlite**           | `0.34+` | SQLite query layer                           |
-| **sqlx**               | `0.8+`  | PostgreSQL async query layer (optional)      |
-| **utoipa**             | `5.3+`  | OpenAPI documentation generation             |
-| **tracing**            | `0.1+`  | Structured logging                           |
-| **tracing-subscriber** | `0.3+`  | Log collection and formatting                |
+| Crate | Version | Usage |
+| --- | --- | --- |
+| **axum** | `0.8+` | Web framework for REST API |
+| **tokio** | `1.42+` | Async runtime |
+| **tower** | `0.5+` | Middleware and service abstractions |
+| **tower-http** | `0.6+` | HTTP middleware (CORS, compression, tracing) |
+| **rusqlite** | `0.34+` | SQLite query layer |
+| **sqlx** | `0.8+` | PostgreSQL async query layer (optional) |
+| **utoipa** | `5.3+` | OpenAPI documentation generation |
+| **tracing** | `0.1+` | Structured logging |
+| **tracing-subscriber** | `0.3+` | Log collection and formatting |
 
 ### 5.5. Development & Testing
 
-| Crate         | Version | Usage                             |
-| ------------- | ------- | --------------------------------- |
-| **criterion** | `0.5+`  | Benchmarking                      |
-| **proptest**  | `1.6+`  | Property-based testing            |
-| **tempfile**  | `3.14+` | Temporary file creation for tests |
-| **mockall**   | `0.13+` | Mocking framework                 |
+| Crate | Version | Usage |
+| --- | --- | --- |
+| **criterion** | `0.5+` | Benchmarking |
+| **proptest** | `1.6+` | Property-based testing |
+| **tempfile** | `3.14+` | Temporary file creation for tests |
+| **mockall** | `0.13+` | Mocking framework |
 
 ### 5.6. Infrastructure & Deployment
 
