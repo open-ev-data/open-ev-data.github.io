@@ -3,12 +3,12 @@ name: Deploy MkDocs Page with Mike
 on:
   push:
     tags:
-      - 'v*.*.*'
-      - 'v*.*.*.doc.*'
+      - "v*.*.*"
+      - "v*.*.*.doc.*"
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version tag to deploy (e.g., v1.2.0.doc.1)'
+        description: "Version tag to deploy (e.g., v1.2.0.doc.1)"
         required: true
         type: string
 
@@ -44,7 +44,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install Poetry
         run: pip install poetry
@@ -60,7 +60,7 @@ jobs:
           else
             TAG=${GITHUB_REF##*/}
           fi
-          
+
           if [[ $TAG =~ ^v([0-9]+\.[0-9]+)\.[0-9]+\.doc\.[0-9]+$ ]]; then
             VERSION="${BASH_REMATCH[1]}.x"
           elif [[ $TAG =~ ^v([0-9]+\.[0-9]+)\.[0-9]+$ ]]; then
@@ -69,7 +69,7 @@ jobs:
             echo "Error: Tag format not recognized: $TAG"
             exit 1
           fi
-          
+
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "TAG=$TAG" >> $GITHUB_ENV
           echo "Deploying version: $VERSION (from tag: $TAG)"
@@ -83,15 +83,20 @@ jobs:
           poetry run mike deploy --update-aliases ${VERSION} latest
           poetry run mike set-default latest
 
-      - name: Copy Google Verification File to Root
+      - name: Update Root Files (Verification + Robots.txt)
         run: |
           git checkout gh-pages
+
+          # Copy verification file if exists
           cp ${VERSION}/googleb888a8ce45bda477.html . || echo "Verification file not found in version, skipping"
-          git add googleb888a8ce45bda477.html
-          git commit -m "chore: add Google verification file to root" || echo "No changes to commit"
+
+          # Generate robots.txt
+          echo "User-agent: *" > robots.txt
+          echo "Sitemap: https://open-ev-data.github.io/latest/sitemap.xml" >> robots.txt
+
+          git add googleb888a8ce45bda477.html robots.txt
+          git commit -m "chore: update root files (verification + robots.txt)" || echo "No changes to commit"
 
       - name: Push Changes
         run: |
           git push origin gh-pages
-
-
