@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://open-ev-data.github.io/latest/sitemap.xml
