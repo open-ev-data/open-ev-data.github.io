@@ -100,7 +100,7 @@ npm install
 npm run validate
 ```
 
-Read the [Dataset Architecture](../dataset/ARCHITECTURE.md) and [Schema Documentation](../dataset/SCHEMA.md).
+Read the [Dataset Architecture](https://github.com/open-ev-data/open-ev-data-dataset/blob/main/docs/ARCHITECTURE.md) and [Schema Documentation](https://github.com/open-ev-data/open-ev-data-dataset/blob/main/docs/SCHEMA.md).
 
 ### For API Developers
 
@@ -112,7 +112,7 @@ cargo build
 cargo test
 ```
 
-Read the [API Architecture](../api/ARCHITECTURE.md).
+Read the [API Architecture](https://github.com/open-ev-data/open-ev-data-api/blob/main/ARCHITECTURE.md).
 
 ### Quick Start with Docker
 
@@ -191,7 +191,7 @@ For questions or issues:
 
 - Open an issue in the relevant repository
 - Join discussions in [GitHub Discussions](https://github.com/orgs/open-ev-data/discussions)
-- Check existing [documentation](../index.md)
+- Check existing [documentation](https://open-ev-data.github.io)
 
 ---
 
