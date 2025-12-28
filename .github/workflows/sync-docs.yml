@@ -9,26 +9,63 @@ on:
   workflow_dispatch:
     inputs:
       source:
-        description: 'Source repository to sync from'
+        description: "Source repository to sync from"
         required: true
         type: choice
         options:
+          - all
           - api
           - dataset
           - governance
       ref:
-        description: 'Git ref (branch/tag/commit) to sync from'
+        description: "Git ref (branch/tag/commit) to sync from"
         required: false
-        default: 'main'
+        default: "main"
         type: string
 
 permissions:
   contents: write
 
 jobs:
-  sync-docs:
-    name: Sync Documentation from ${{ github.event_name == 'workflow_dispatch' && inputs.source || github.event.client_payload.source }}
+  prepare:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          # Initialize variables
+          INPUT_SOURCE=""
+          INPUT_REF=""
+          SHA_VAL=""
+
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            INPUT_SOURCE="${{ inputs.source }}"
+            INPUT_REF="${{ inputs.ref }}"
+          else
+            # For repository_dispatch, source comes from payload
+            INPUT_SOURCE="${{ github.event.client_payload.source }}"
+            INPUT_REF="${{ github.event.client_payload.ref }}"
+            SHA_VAL="${{ github.event.client_payload.sha }}"
+          fi
+
+          if [ "$INPUT_SOURCE" == "all" ]; then
+              # Create matrix for all repositories
+              # Using minified JSON for matrix output
+              echo "matrix={\"include\":[{\"source\":\"api\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"dataset\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"governance\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"}]}" >> $GITHUB_OUTPUT
+          else
+              # Single repository
+              echo "matrix={\"include\":[{\"source\":\"$INPUT_SOURCE\",\"ref\":\"$INPUT_REF\",\"sha\":\"$SHA_VAL\"}]}" >> $GITHUB_OUTPUT
+          fi
+
+  sync-docs:
+    needs: prepare
+    name: Sync ${{ matrix.source }}
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+      fail-fast: false
     permissions:
       contents: write
       actions: write
@@ -36,14 +73,29 @@ jobs:
       - name: Set Source Variables
         id: source
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "source=${{ inputs.source }}" >> $GITHUB_OUTPUT
-            echo "ref=${{ inputs.ref }}" >> $GITHUB_OUTPUT
-            echo "sha=$(git ls-remote https://github.com/open-ev-data/${{ inputs.source == 'governance' && '.github' || format('open-ev-data-{0}', inputs.source) }} ${{ inputs.ref }} | cut -f1)" >> $GITHUB_OUTPUT
+          SOURCE="${{ matrix.source }}"
+          REF="${{ matrix.ref }}"
+          SHA="${{ matrix.sha }}"
+
+          echo "source=$SOURCE" >> $GITHUB_OUTPUT
+
+          if [ -n "$SHA" ]; then
+             echo "sha=$SHA" >> $GITHUB_OUTPUT
           else
-            echo "source=${{ github.event.client_payload.source }}" >> $GITHUB_OUTPUT
-            echo "ref=${{ github.event.client_payload.ref }}" >> $GITHUB_OUTPUT
-            echo "sha=${{ github.event.client_payload.sha }}" >> $GITHUB_OUTPUT
+             # Calculate SHA from Ref if not provided
+             REPO_SUFFIX="open-ev-data-$SOURCE"
+             if [ "$SOURCE" == "governance" ]; then REPO_SUFFIX=".github"; fi
+             REPO_URL="https://github.com/open-ev-data/$REPO_SUFFIX"
+             
+             echo "Resolving SHA for $REPO_URL at $REF..."
+             CALCULATED_SHA=$(git ls-remote $REPO_URL $REF | cut -f1)
+             
+             if [ -z "$CALCULATED_SHA" ]; then
+               echo "Error: Could not resolve SHA for $REF"
+               exit 1
+             fi
+             
+             echo "sha=$CALCULATED_SHA" >> $GITHUB_OUTPUT
           fi
 
       - name: Generate GitHub App token
@@ -64,20 +116,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Checkout Source Repository (API/Dataset)
-        if: steps.source.outputs.source != 'governance'
+      - name: Checkout Source Repository
         uses: actions/checkout@v4
         with:
-          repository: open-ev-data/open-ev-data-${{ steps.source.outputs.source }}
-          ref: ${{ steps.source.outputs.sha }}
-          path: source-repo
-          token: ${{ steps.generate_token.outputs.token }}
-
-      - name: Checkout Source Repository (Governance)
-        if: steps.source.outputs.source == 'governance'
-        uses: actions/checkout@v4
-        with:
-          repository: open-ev-data/.github
+          repository: ${{ steps.source.outputs.source == 'governance' && 'open-ev-data/.github' || format('open-ev-data/open-ev-data-{0}', steps.source.outputs.source) }}
           ref: ${{ steps.source.outputs.sha }}
           path: source-repo
           token: ${{ steps.generate_token.outputs.token }}
@@ -86,9 +128,9 @@ jobs:
         if: steps.source.outputs.source == 'api'
         run: |
           mkdir -p docs/api
-          
+
           cp source-repo/README.md docs/api/index.md
-          
+
           cp source-repo/docs/GET_STARTED.md docs/api/
           cp source-repo/docs/ARCHITECTURE.md docs/api/
           cp source-repo/docs/TESTING.md docs/api/
@@ -99,30 +141,31 @@ jobs:
           cp source-repo/docs/CRATE_EV_CORE.md docs/api/
           cp source-repo/docs/CRATE_EV_ETL.md docs/api/
           cp source-repo/docs/CRATE_EV_SERVER.md docs/api/
-          
+
           cp source-repo/CHANGELOG.md docs/changelog-api.md
 
       - name: Sync Dataset Documentation
         if: steps.source.outputs.source == 'dataset'
         run: |
           mkdir -p docs/dataset
-          
+
           cp source-repo/README.md docs/dataset/index.md
-          
+
           cp source-repo/docs/HOW_TO_CONSUME.md docs/dataset/
           cp source-repo/docs/ARCHITECTURE.md docs/dataset/
           cp source-repo/docs/SCHEMA.md docs/dataset/
           cp source-repo/docs/RELEASE_PROCESS.md docs/dataset/
           cp source-repo/docs/CONTRIBUTING_VEHICLES.md docs/dataset/
-          
+
           cp source-repo/CHANGELOG.md docs/changelog-dataset.md
 
       - name: Sync Governance Documentation
         if: steps.source.outputs.source == 'governance'
         run: |
           mkdir -p docs/governance
-          
+
           cp source-repo/README.md docs/governance/index.md
+
           cp source-repo/GET_STARTED.md docs/governance/GET_STARTED.md
           cp source-repo/CONTRIBUTING.md docs/governance/CONTRIBUTING.md
           cp source-repo/CODE_OF_CONDUCT.md docs/governance/CODE_OF_CONDUCT.md
@@ -134,18 +177,14 @@ jobs:
             echo "No documentation changes detected"
             exit 0
           fi
-          
-          SOURCE="${{ steps.source.outputs.source }}"
-          
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            REF="${{ inputs.ref }}"
-            VERSION="$REF"
-          else
-            VERSION="${{ github.event.client_payload.version }}"
-          fi
-          
-          git commit -m "docs($SOURCE): sync documentation from $SOURCE@$VERSION"
-          git push origin main
-          
-          echo "✅ Documentation synchronized from $SOURCE"
 
+          # Pull latest changes to avoid conflicts in matrix execution
+          git pull --rebase origin main
+
+          SOURCE="${{ steps.source.outputs.source }}"
+          SHA="${{ steps.source.outputs.sha }}"
+
+          git commit -m "docs($SOURCE): sync documentation from $SOURCE@$SHA"
+          git push origin main
+
+          echo "✅ Documentation synchronized from $SOURCE"
