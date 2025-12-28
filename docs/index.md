@@ -178,7 +178,7 @@ services:
       "
 ```
 
-Run `docker compose up -d --build` to start the API server.
+Run `docker compose up -d --build --pull always` to start the API server.
 
 Access the API at `http://localhost:8080/docs`.
 
