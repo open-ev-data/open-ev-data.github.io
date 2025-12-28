@@ -299,20 +299,20 @@ Create variants only when specifications materially differ between configuration
 
 ## Minimal Required Example
 
-See [example/minimal_required.json](https://github.com/open-ev-data/open-ev-data-dataset/blob/main/example/minimal_required.json) for a complete minimal vehicle with only required fields.
+See [example/minimal_required.json](../example/minimal_required.json) for a complete minimal vehicle with only required fields.
 
 ---
 
 ## Troubleshooting
 
-| Issue                    | Solution                                                              |
-| ------------------------ | --------------------------------------------------------------------- |
-| `Loaded 0 vehicle files` | Check that `src/` directory contains valid JSON files                 |
+| Issue | Solution |
+|-------|----------|
+| `Loaded 0 vehicle files` | Check that `src/` directory contains valid JSON files |
 | `MissingBatteryCapacity` | Add `pack_capacity_kwh_net` or `pack_capacity_kwh_gross` to `battery` |
-| `MissingChargePort`      | Add at least one entry to `charge_ports` array                        |
-| `MissingRatedRange`      | Add at least one entry to `range.rated` array                         |
-| `MissingSource`          | Add at least one entry to `sources` array                             |
-| `InvalidSlug`            | Ensure slugs are lowercase with only `a-z`, `0-9`, `_`                |
+| `MissingChargePort` | Add at least one entry to `charge_ports` array |
+| `MissingRatedRange` | Add at least one entry to `range.rated` array |
+| `MissingSource` | Add at least one entry to `sources` array |
+| `InvalidSlug` | Ensure slugs are lowercase with only `a-z`, `0-9`, `_` |
 
 ---
 

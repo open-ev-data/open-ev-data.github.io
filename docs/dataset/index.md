@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/open-ev-data/.github/378e7b6f98236e4b5597dee96e864373bdfc2541/assets/open-ev-data.svg" alt="OpenEV Data Logo" width="200" />
+  <img src="https://raw.githubusercontent.com/open-ev-data/.github/bd1f96d4c236e7c1dc43a33535fc9f065f9b152e/assets/open-ev-data-logo.svg" alt="OpenEV Data Logo" width="200" />
 </div>
 
 # OpenEV Data Dataset
@@ -16,11 +16,12 @@ This repository provides a **structured, versioned, and community-maintained dat
 ## Documentation
 
 ### Getting Started
-- **[How to Consume](HOW_TO_CONSUME.md)** — Complete guide on using the dataset in all available formats with examples
+- **[How to Consume](docs/HOW_TO_CONSUME.md)** — Complete guide on using the dataset in all available formats with examples
 
 ### Repository Documentation
-- **[Architecture](ARCHITECTURE.md)** — Repository architecture, layered data model, build process, and authoring rules
-- **[Schema Reference](SCHEMA.md)** — Complete field-by-field documentation of the vehicle data schema
+- **[Architecture](docs/ARCHITECTURE.md)** — Repository architecture, layered data model, build process, and authoring rules
+- **[Schema Reference](docs/SCHEMA.md)** — Complete field-by-field documentation of the vehicle data schema
+- **[Contributing Vehicles](docs/CONTRIBUTING_VEHICLES.md)** — Step-by-step guide to add new vehicles and validate changes
 
 ### Project Governance
 - **[Getting Started](https://github.com/open-ev-data/.github/blob/main/GET_STARTED.md)** — How to set up the complete development environment with all repositories
@@ -70,7 +71,7 @@ docker-compose up -d
 
 Access the API at `http://localhost:8080/api/v1/vehicles`
 
-See [How to Consume](HOW_TO_CONSUME.md) for detailed usage examples in all formats.
+See [How to Consume](docs/HOW_TO_CONSUME.md) for detailed usage examples in all formats.
 
 ## License
 
@@ -86,4 +87,3 @@ See [LICENCE](LICENCE) for full terms.
 ## Acknowledgments
 
 This project is inspired by the need for open, structured, and verifiable EV data. Special thanks to all contributors who help maintain and improve this dataset.
-
