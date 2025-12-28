@@ -8,14 +8,11 @@ edit_uri: ""
 
 copyright: Copyright &copy; 2025 OpenEV Data Contributors
 
-extra:
-  google_site_verification: fj2Tueuj9hv7V9o5XJh1a3VNQiSncuV9XcWWHU_0grM
-
 theme:
   name: material
   custom_dir: overrides
   logo: assets/images/open-ev-data-logo.svg
-  favicon: assets/images/open-ev-data-logo.png
+  favicon: assets/images/open-ev-data-logo-mini.png
   palette:
     - scheme: slate
       primary: black
@@ -57,6 +54,7 @@ extra_css:
   - assets/stylesheets/extra.css
 
 extra:
+  google_site_verification: fj2Tueuj9hv7V9o5XJh1a3VNQiSncuV9XcWWHU_0grM
   version:
     provider: mike
     default: latest
@@ -137,37 +135,36 @@ markdown_extensions:
 nav:
   - About: index.md
   - Getting Started:
-    - Overview: getting-started/index.md
-    - Quick Start: getting-started/quick-start.md
-    - Installation: getting-started/installation.md
+      - Overview: getting-started/index.md
+      - Quick Start: getting-started/quick-start.md
+      - Installation: getting-started/installation.md
   - Project Governance:
-    - Overview: governance/index.md
-    - Getting Started: governance/GET_STARTED.md
-    - Contributing: governance/CONTRIBUTING.md
-    - Code of Conduct: governance/CODE_OF_CONDUCT.md
+      - Overview: governance/index.md
+      - Getting Started: governance/GET_STARTED.md
+      - Contributing: governance/CONTRIBUTING.md
+      - Code of Conduct: governance/CODE_OF_CONDUCT.md
   - API Documentation:
-    - Overview: api/index.md
-    - Get Started: api/GET_STARTED.md
-    - Architecture: api/ARCHITECTURE.md
-    - Testing: api/TESTING.md
-    - Rust Guidelines: api/RUST_GUIDELINES.md
-    - Release Strategy: api/RELEASE_STRATEGY.md
-    - API Errors: api/API_ERRORS.md
-    - Problem Details RFC: api/PROBLEM_DETAILS_RFC_7807.md
-    - Crates:
-      - ev-core: api/CRATE_EV_CORE.md
-      - ev-etl: api/CRATE_EV_ETL.md
-      - ev-server: api/CRATE_EV_SERVER.md
+      - Overview: api/index.md
+      - Get Started: api/GET_STARTED.md
+      - Architecture: api/ARCHITECTURE.md
+      - Testing: api/TESTING.md
+      - Rust Guidelines: api/RUST_GUIDELINES.md
+      - Release Strategy: api/RELEASE_STRATEGY.md
+      - API Errors: api/API_ERRORS.md
+      - Problem Details RFC: api/PROBLEM_DETAILS_RFC_7807.md
+      - Crates:
+          - ev-core: api/CRATE_EV_CORE.md
+          - ev-etl: api/CRATE_EV_ETL.md
+          - ev-server: api/CRATE_EV_SERVER.md
   - Dataset Documentation:
-    - Overview: dataset/index.md
-    - How to Consume: dataset/HOW_TO_CONSUME.md
-    - Architecture: dataset/ARCHITECTURE.md
-    - Schema Reference: dataset/SCHEMA.md
-    - Contributing Vehicles: dataset/CONTRIBUTING_VEHICLES.md
-    - Release Process: dataset/RELEASE_PROCESS.md
+      - Overview: dataset/index.md
+      - How to Consume: dataset/HOW_TO_CONSUME.md
+      - Architecture: dataset/ARCHITECTURE.md
+      - Schema Reference: dataset/SCHEMA.md
+      - Contributing Vehicles: dataset/CONTRIBUTING_VEHICLES.md
+      - Release Process: dataset/RELEASE_PROCESS.md
   - Changelog:
-    - API Changelog: changelog-api.md
-    - Dataset Changelog: changelog-dataset.md
+      - API Changelog: changelog-api.md
+      - Dataset Changelog: changelog-dataset.md
   - Guides:
-    - Contributing: guides/contributing.md
-
+      - Contributing: guides/contributing.md

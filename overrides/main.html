@@ -1,9 +1,20 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
-  {% if config.extra.google_site_verification %}
-    <meta name="google-site-verification" content="{{ config.extra.google_site_verification }}" />
-  {% endif %}
-  {{ super() }}
+{% if config.extra.google_site_verification %}
+<meta name="google-site-verification" content="{{ config.extra.google_site_verification }}" />
+{% endif %}
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "OpenEV Data",
+      "url": "https://open-ev-data.github.io",
+      "logo": "https://open-ev-data.github.io/assets/images/open-ev-data-logo-mini.png",
+      "sameAs": [
+        "https://github.com/open-ev-data"
+      ]
+    }
+  </script>
+{{ super() }}
 {% endblock %}
-
