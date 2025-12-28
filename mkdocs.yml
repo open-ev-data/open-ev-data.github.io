@@ -163,6 +163,7 @@ nav:
     - How to Consume: dataset/HOW_TO_CONSUME.md
     - Architecture: dataset/ARCHITECTURE.md
     - Schema Reference: dataset/SCHEMA.md
+    - Contributing Vehicles: dataset/CONTRIBUTING_VEHICLES.md
     - Release Process: dataset/RELEASE_PROCESS.md
   - Changelog:
     - API Changelog: changelog-api.md

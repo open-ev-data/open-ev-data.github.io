@@ -113,6 +113,7 @@ jobs:
           cp source-repo/docs/ARCHITECTURE.md docs/dataset/
           cp source-repo/docs/SCHEMA.md docs/dataset/
           cp source-repo/docs/RELEASE_PROCESS.md docs/dataset/
+          cp source-repo/docs/CONTRIBUTING_VEHICLES.md docs/dataset/
           
           cp source-repo/CHANGELOG.md docs/changelog-dataset.md
 
