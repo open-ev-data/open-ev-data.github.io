@@ -20,7 +20,7 @@ title: About
 
     ---
 
-    High-performance Rust ecosystem with Edge API deployment, providing global low-latency access to data.
+    High-performance Rust ecosystem with API deployment, providing global low-latency access to data.
 
 -   __Data-as-Code__
 
@@ -83,12 +83,12 @@ OpenEV Data develops and maintains the world's most accurate open database of El
 
 OpenEV Data is modular by design to separate concerns between data curation and software engineering.
 
-| Repository                                                                           | Description                                                                 | Tech Stack                         |
-| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------- | :--------------------------------- |
-| [**open-ev-data-dataset**](https://github.com/open-ev-data/open-ev-data-dataset)     | The core database. Contains all vehicle JSONs and validation schemas.       | JSON, JSON Schema                  |
-| [**open-ev-data-api**](https://github.com/open-ev-data/open-ev-data-api)             | The high-performance engine. Handles ETL, SQL generation, and the Edge API. | **Rust**, Wasm, Cloudflare Workers |
-| [**open-ev-data.github.io**](https://github.com/open-ev-data/open-ev-data.github.io) | Official documentation, guides, and API reference.                          | MkDocs, Material                   |
-| [**.github**](https://github.com/open-ev-data/.github)                               | Governance, organization-wide policies, and issue templates.                | Markdown                           |
+| Repository                                                                           | Description                                                            | Tech Stack        |
+| :----------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :---------------- |
+| [**open-ev-data-dataset**](https://github.com/open-ev-data/open-ev-data-dataset)     | The core database. Contains all vehicle JSONs and validation schemas.  | JSON, JSON Schema |
+| [**open-ev-data-api**](https://github.com/open-ev-data/open-ev-data-api)             | The high-performance engine. Handles ETL, SQL generation, and the API. | **Rust**          |
+| [**open-ev-data.github.io**](https://github.com/open-ev-data/open-ev-data.github.io) | Official documentation, guides, and API reference.                     | MkDocs, Material  |
+| [**.github**](https://github.com/open-ev-data/.github)                               | Governance, organization-wide policies, and issue templates.           | Markdown          |
 
 ## Use Cases
 
@@ -134,7 +134,7 @@ OpenEV Data standardizes specifications across multiple global charging standard
 
 - **Strict Typing**: All data is validated against rigorous JSON Schemas before merging
 - **Deep Merge Architecture**: Hierarchical inheritance model (Base → Year → Trim) ensures DRY data entry
-- **Edge Computing**: API deployed globally using Cloudflare Workers, ensuring <50ms latency
+- **High Performance**: API optimized for low-latency global access using efficient Rust infrastructure
 - **Rust Core**: All tooling (ETL, Validation, Server) written in Rust for safety and performance
 
 ## Docker Compose Example

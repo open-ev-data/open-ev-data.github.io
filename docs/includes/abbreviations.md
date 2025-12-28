@@ -6,7 +6,6 @@
 *[CSV]: Comma-Separated Values
 *[XML]: Extensible Markup Language
 *[SQL]: Structured Query Language
-*[WASM]: WebAssembly
 *[WLTP]: Worldwide Harmonized Light Vehicle Test Procedure
 *[EPA]: Environmental Protection Agency
 *[NEDC]: New European Driving Cycle

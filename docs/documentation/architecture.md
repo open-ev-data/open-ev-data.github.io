@@ -229,9 +229,8 @@ Rust's type system prevents invalid states:
 
 API deployed at the edge:
 
-- Cloudflare Workers (future)
-- Sub-50ms latency worldwide
-- No cold starts
+- Production-ready deployments
+- Low-latency worldwide access
 - Automatic scaling
 
 ## Design Patterns
@@ -274,9 +273,8 @@ Documentation follows software practices:
 
 1. **Performance**: Near C/C++ speed
 2. **Safety**: No segfaults, no data races
-3. **WebAssembly**: Edge deployment ready
-4. **Tooling**: Cargo, rustfmt, clippy
-5. **Community**: Growing ecosystem
+3. **Tooling**: Cargo, rustfmt, clippy
+4. **Community**: Growing ecosystem
 
 ### Why MkDocs Material?
 
@@ -326,30 +324,7 @@ graph LR
     DocsBuild -->|Deploy| Site
 ```
 
-### Future (Edge API)
 
-```mermaid
-graph LR
-    subgraph "Build"
-        ETL[ETL Pipeline]
-    end
-    
-    subgraph "Storage"
-        D1[Cloudflare D1<br/>SQLite]
-    end
-    
-    subgraph "Edge"
-        Workers[Cloudflare Workers<br/>Global]
-    end
-    
-    subgraph "Users"
-        Client[API Consumers]
-    end
-    
-    ETL -->|Deploy| D1
-    D1 -->|Query| Workers
-    Workers <-->|<10ms| Client
-```
 
 ## Quality Assurance
 
