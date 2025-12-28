@@ -178,13 +178,15 @@ jobs:
             exit 0
           fi
 
-          # Pull latest changes to avoid conflicts in matrix execution
-          git pull --rebase origin main
-
           SOURCE="${{ steps.source.outputs.source }}"
           SHA="${{ steps.source.outputs.sha }}"
 
+          # Commit changes locally first
           git commit -m "docs($SOURCE): sync documentation from $SOURCE@$SHA"
+
+          # Pull and rebase on top of latest main (handles matrix race conditions)
+          git pull --rebase origin main
+
           git push origin main
 
           echo "✅ Documentation synchronized from $SOURCE"
