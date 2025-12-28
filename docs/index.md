@@ -73,22 +73,22 @@ OpenEV Data develops and maintains the world's most accurate open database of El
 
 ## Project Status
 
-| Component | Status |
-|-----------|--------|
-| **Website** | [![Website](https://img.shields.io/website?url=https%3A%2F%2Fopen-ev-data.github.io)](https://open-ev-data.github.io) |
-| **API** | [![Status](https://img.shields.io/website?url=https%3A%2F%2Fapi.open-ev-data.org%2Fhealth)](https://github.com/open-ev-data/open-ev-data-api) |
+| Component   | Status                                                                                                                                                        |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Website** | [![Website](https://img.shields.io/website?url=https%3A%2F%2Fopen-ev-data.github.io)](https://open-ev-data.github.io)                                         |
+| **API**     | [![Status](https://img.shields.io/website?url=https%3A%2F%2Fapi.open-ev-data.org%2Fhealth)](https://github.com/open-ev-data/open-ev-data-api)                 |
 | **Dataset** | [![Latest Release](https://img.shields.io/github/v/release/open-ev-data/open-ev-data-dataset)](https://github.com/open-ev-data/open-ev-data-dataset/releases) |
 
 ## Repository Structure
 
 OpenEV Data is modular by design to separate concerns between data curation and software engineering.
 
-| Repository | Description | Tech Stack |
-|:-----------|:------------|:-----------|
-| [**open-ev-data-dataset**](https://github.com/open-ev-data/open-ev-data-dataset) | The core database. Contains all vehicle JSONs and validation schemas. | JSON, JSON Schema |
-| [**open-ev-data-api**](https://github.com/open-ev-data/open-ev-data-api) | The high-performance engine. Handles ETL, SQL generation, and the Edge API. | **Rust**, Wasm, Cloudflare Workers |
-| [**open-ev-data.github.io**](https://github.com/open-ev-data/open-ev-data.github.io) | Official documentation, guides, and API reference. | MkDocs, Material |
-| [**.github**](https://github.com/open-ev-data/.github) | Governance, organization-wide policies, and issue templates. | Markdown |
+| Repository                                                                           | Description                                                                 | Tech Stack                         |
+| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------- | :--------------------------------- |
+| [**open-ev-data-dataset**](https://github.com/open-ev-data/open-ev-data-dataset)     | The core database. Contains all vehicle JSONs and validation schemas.       | JSON, JSON Schema                  |
+| [**open-ev-data-api**](https://github.com/open-ev-data/open-ev-data-api)             | The high-performance engine. Handles ETL, SQL generation, and the Edge API. | **Rust**, Wasm, Cloudflare Workers |
+| [**open-ev-data.github.io**](https://github.com/open-ev-data/open-ev-data.github.io) | Official documentation, guides, and API reference.                          | MkDocs, Material                   |
+| [**.github**](https://github.com/open-ev-data/.github)                               | Governance, organization-wide policies, and issue templates.                | Markdown                           |
 
 ## Use Cases
 
@@ -136,6 +136,51 @@ OpenEV Data standardizes specifications across multiple global charging standard
 - **Deep Merge Architecture**: Hierarchical inheritance model (Base → Year → Trim) ensures DRY data entry
 - **Edge Computing**: API deployed globally using Cloudflare Workers, ensuring <50ms latency
 - **Rust Core**: All tooling (ETL, Validation, Server) written in Rust for safety and performance
+
+## Docker Compose Example
+
+Create a `docker-compose.yml` file with the following content:
+
+```yaml
+name: open-ev-data
+
+services:
+  api:
+    image: ghcr.io/open-ev-data/ev-server:latest
+    container_name: open-ev-data-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: /app/vehicles.db
+      PORT: 8080
+      HOST: 0.0.0.0
+      RUST_LOG: info
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    init: true
+    entrypoint: >
+      sh -c "
+        echo '[INFO] Getting latest release version...' &&
+        LATEST_VERSION=$$(curl -sL https://api.github.com/repos/open-ev-data/open-ev-data-dataset/releases/latest | grep '\"tag_name\":' | cut -d'\"' -f4) &&
+        echo \"[INFO] Latest version: $$LATEST_VERSION\" &&
+        DOWNLOAD_URL=\"https://github.com/open-ev-data/open-ev-data-dataset/releases/download/$$LATEST_VERSION/open-ev-data-$$LATEST_VERSION.db\" &&
+        echo \"[INFO] Downloading from: $$DOWNLOAD_URL\" &&
+        curl -fSL -o /app/vehicles.db \"$$DOWNLOAD_URL\" &&
+        echo \"[INFO] Database downloaded\" &&
+        ls -lh /app/vehicles.db &&
+        echo \"[INFO] Starting API server...\" &&
+        exec /app/ev-server
+      "
+```
+
+Run `docker compose up -d --build` to start the API server.
+
+Access the API at `http://localhost:8080/docs`.
 
 ## License
 
