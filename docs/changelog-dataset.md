@@ -4,6 +4,51 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commits](https://www.conventionalcommits.org/).
 
+## [1.23.0](https://github.com/open-ev-data/open-ev-data-dataset/compare/v1.22.0...v1.23.0) (2025-12-30)
+
+### Features
+
+* **genesis, lexus, porsche:** add new vehicle specifications for multiple models ([3522a51](https://github.com/open-ev-data/open-ev-data-dataset/commit/3522a51d1027e447de3e806a88b2669603c50595))
+* **tata:** add new vehicle specifications for multiple models ([1a0b071](https://github.com/open-ev-data/open-ev-data-dataset/commit/1a0b0714bd3d77a027d40e22302a4cfb276d26c3))
+* **vinfast:** add new vehicle specifications for multiple models ([2873f8f](https://github.com/open-ev-data/open-ev-data-dataset/commit/2873f8f9aad12dafab63378e31a0bd1c780d3c0e))
+
+## [1.22.0](https://github.com/open-ev-data/open-ev-data-dataset/compare/v1.21.0...v1.22.0) (2025-12-30)
+
+### Features
+
+* **changan:** add new vehicle specifications for multiple models ([340fb87](https://github.com/open-ev-data/open-ev-data-dataset/commit/340fb874e1750c7674849869fc0a2508ed8cca22))
+* **chery:** add new vehicle specifications for multiple models ([1b39c1d](https://github.com/open-ev-data/open-ev-data-dataset/commit/1b39c1d99eeca6e2e8007c752a794b9742f8a1ea))
+* **dongfeng, m_hero, nammi, voyah:** add new vehicle specifications for multiple models ([085a7ae](https://github.com/open-ev-data/open-ev-data-dataset/commit/085a7ae360d9a677dfa8e9b35712237fa4339a6e))
+* **geely:** add new vehicle specifications for multiple models ([b9f4477](https://github.com/open-ev-data/open-ev-data-dataset/commit/b9f4477e244e7f448928db54f6ba997230b2ab40))
+* **im_motors, rising_auto, roewe:** add new vehicle specifications for multiple models ([41bfd25](https://github.com/open-ev-data/open-ev-data-dataset/commit/41bfd25e7d82744e40da4e83706b72232eaca450))
+
+## [1.21.0](https://github.com/open-ev-data/open-ev-data-dataset/compare/v1.20.0...v1.21.0) (2025-12-29)
+
+### Features
+
+* **gac_aion:** add new vehicle specifications for Aion models ([e4a19ce](https://github.com/open-ev-data/open-ev-data-dataset/commit/e4a19cec2fa416958ddbb2e344d704b22ea5be2f))
+* **leapmotor:** add new vehicle specifications for multiple models ([02917ea](https://github.com/open-ev-data/open-ev-data-dataset/commit/02917ea4f0186a0ae35f2da87387d50ff4b245fc))
+* **mini:** add new vehicle specifications ([71e1225](https://github.com/open-ev-data/open-ev-data-dataset/commit/71e1225551d1782953a92d49a980030351cdff1c))
+* **mitsubishi:** add new vehicle specifications for Eclipse Cross EV and Minicab-MiEV ([5fee377](https://github.com/open-ev-data/open-ev-data-dataset/commit/5fee377a52440e68a385250e2d5366cc58ade4d0))
+* **nio:** add new vehicle specifications for multiple models ([afd6c1a](https://github.com/open-ev-data/open-ev-data-dataset/commit/afd6c1a4d309c3964e6c1cd1c5cb3f6f71f3701f))
+* **xpeng:** add new vehicle specifications ([3aee847](https://github.com/open-ev-data/open-ev-data-dataset/commit/3aee847d8aabe7835ce626016fd0358a15f936ca))
+* **zeekr:** add new vehicle specifications for Zeekr models ([7af142a](https://github.com/open-ev-data/open-ev-data-dataset/commit/7af142a3c4108f8eef893d94b499bde445ee5328))
+
+## [1.20.0](https://github.com/open-ev-data/open-ev-data-dataset/compare/v1.19.0...v1.20.0) (2025-12-29)
+
+### Features
+
+* **honda:** add new vehicle specifications for Honda models ([f90fa7c](https://github.com/open-ev-data/open-ev-data-dataset/commit/f90fa7c22829167afa2fa27fb467c4c64d61f7fc))
+* **lotus:** add new vehicle specifications ([446919d](https://github.com/open-ev-data/open-ev-data-dataset/commit/446919dc978e2d92eaa7615790ae682904cbaf33))
+* **polestar:** add new vehicle specifications for polestar ([b4d80aa](https://github.com/open-ev-data/open-ev-data-dataset/commit/b4d80aae862c989dd495be2c95c8b50fca953c20))
+* **smart:** add new vehicle specifications for Smart models ([4417081](https://github.com/open-ev-data/open-ev-data-dataset/commit/4417081b545a40a9ef346fced686dc046d135ab4))
+
+## [1.19.0](https://github.com/open-ev-data/open-ev-data-dataset/compare/v1.18.0...v1.19.0) (2025-12-29)
+
+### Features
+
+* **dataset:** add new vehicle specifications for multiple brands and model years ([2ec21b0](https://github.com/open-ev-data/open-ev-data-dataset/commit/2ec21b0873769b2b9361a7d3c434614cc96fa45f))
+
 ## [1.18.0](https://github.com/open-ev-data/open-ev-data-dataset/compare/v1.17.0...v1.18.0) (2025-12-29)
 
 ### Features
