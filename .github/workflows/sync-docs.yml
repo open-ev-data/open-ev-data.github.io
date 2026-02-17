@@ -17,6 +17,7 @@ on:
           - api
           - dataset
           - governance
+          - ui
       ref:
         description: "Git ref (branch/tag/commit) to sync from"
         required: false
@@ -52,7 +53,7 @@ jobs:
           if [ "$INPUT_SOURCE" == "all" ]; then
               # Create matrix for all repositories
               # Using minified JSON for matrix output
-              echo "matrix={\"include\":[{\"source\":\"api\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"dataset\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"governance\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"}]}" >> $GITHUB_OUTPUT
+              echo "matrix={\"include\":[{\"source\":\"api\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"dataset\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"governance\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"ui\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"}]}" >> $GITHUB_OUTPUT
           else
               # Single repository
               echo "matrix={\"include\":[{\"source\":\"$INPUT_SOURCE\",\"ref\":\"$INPUT_REF\",\"sha\":\"$SHA_VAL\"}]}" >> $GITHUB_OUTPUT
@@ -169,6 +170,23 @@ jobs:
           cp source-repo/GET_STARTED.md docs/governance/GET_STARTED.md
           cp source-repo/CONTRIBUTING.md docs/governance/CONTRIBUTING.md
           cp source-repo/CODE_OF_CONDUCT.md docs/governance/CODE_OF_CONDUCT.md
+
+      - name: Sync UI Documentation
+        if: steps.source.outputs.source == 'ui'
+        run: |
+          mkdir -p docs/ui
+
+          # Use GET_STARTED as index for UI section
+          cp source-repo/docs/GET_STARTED.md docs/ui/index.md
+
+          cp source-repo/docs/ARCHITECTURE.md docs/ui/
+          cp source-repo/docs/DESIGN_SYSTEM.md docs/ui/
+          cp source-repo/docs/PAGE_LAYOUTS.md docs/ui/
+          cp source-repo/docs/RESPONSIVE_STRATEGY.md docs/ui/
+          cp source-repo/docs/SEO_STRATEGY.md docs/ui/
+          cp source-repo/docs/UI_COMPONENTS.md docs/ui/
+
+          cp source-repo/CHANGELOG.md docs/changelog-ui.md
 
       - name: Commit and Push Changes
         run: |

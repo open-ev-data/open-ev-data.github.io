@@ -49,6 +49,10 @@ OpenEV Data develops and maintains the world's most accurate open database of El
 
 <div class="grid cards" markdown>
 
+-   [**OpenEV Data Explorer →**](https://open-ev-data.github.io/open-ev-data-ui/)
+    
+    Visualize, search, and compare electric vehicle specifications
+
 -   [**Get Started →**](getting-started/index.md)
     
     Learn how to use the dataset or API

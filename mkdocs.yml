@@ -163,8 +163,17 @@ nav:
       - Schema Reference: dataset/SCHEMA.md
       - Contributing Vehicles: dataset/CONTRIBUTING_VEHICLES.md
       - Release Process: dataset/RELEASE_PROCESS.md
+  - UI Documentation:
+      - Overview: ui/index.md
+      - Architecture: ui/ARCHITECTURE.md
+      - Design System: ui/DESIGN_SYSTEM.md
+      - Components: ui/UI_COMPONENTS.md
+      - Page Layouts: ui/PAGE_LAYOUTS.md
+      - Responsive Strategy: ui/RESPONSIVE_STRATEGY.md
+      - SEO Strategy: ui/SEO_STRATEGY.md
   - Changelog:
       - API Changelog: changelog-api.md
       - Dataset Changelog: changelog-dataset.md
+      - UI Changelog: changelog-ui.md
   - Guides:
       - Contributing: guides/contributing.md
