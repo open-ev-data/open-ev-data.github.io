@@ -2,134 +2,166 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/changelog-api/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/changelog-dataset/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
+    </url>
+    <url>
+         <loc>https://open-ev-data.github.io/1.4.x/changelog-ui/</loc>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/API_ERRORS/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/ARCHITECTURE/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/CRATE_EV_CORE/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/CRATE_EV_ETL/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/CRATE_EV_SERVER/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/GET_STARTED/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/PROBLEM_DETAILS_RFC_7807/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/RELEASE_STRATEGY/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/RUST_GUIDELINES/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/api/TESTING/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/dataset/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/dataset/ARCHITECTURE/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/dataset/CONTRIBUTING_VEHICLES/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/dataset/HOW_TO_CONSUME/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/dataset/RELEASE_PROCESS/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/dataset/SCHEMA/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/documentation/architecture/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/documentation/dataset/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/documentation/dataset/architecture/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/documentation/dataset/schema/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/getting-started/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/getting-started/installation/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/getting-started/quick-start/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/governance/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/governance/CODE_OF_CONDUCT/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/governance/CONTRIBUTING/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/governance/GET_STARTED/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/guides/contributing/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
     </url>
     <url>
          <loc>https://open-ev-data.github.io/1.4.x/includes/abbreviations/</loc>
-         <lastmod>2025-12-30</lastmod>
+         <lastmod>2026-02-17</lastmod>
+    </url>
+    <url>
+         <loc>https://open-ev-data.github.io/1.4.x/ui/</loc>
+         <lastmod>2026-02-17</lastmod>
+    </url>
+    <url>
+         <loc>https://open-ev-data.github.io/1.4.x/ui/ARCHITECTURE/</loc>
+         <lastmod>2026-02-17</lastmod>
+    </url>
+    <url>
+         <loc>https://open-ev-data.github.io/1.4.x/ui/DESIGN_SYSTEM/</loc>
+         <lastmod>2026-02-17</lastmod>
+    </url>
+    <url>
+         <loc>https://open-ev-data.github.io/1.4.x/ui/PAGE_LAYOUTS/</loc>
+         <lastmod>2026-02-17</lastmod>
+    </url>
+    <url>
+         <loc>https://open-ev-data.github.io/1.4.x/ui/RESPONSIVE_STRATEGY/</loc>
+         <lastmod>2026-02-17</lastmod>
+    </url>
+    <url>
+         <loc>https://open-ev-data.github.io/1.4.x/ui/SEO_STRATEGY/</loc>
+         <lastmod>2026-02-17</lastmod>
+    </url>
+    <url>
+         <loc>https://open-ev-data.github.io/1.4.x/ui/UI_COMPONENTS/</loc>
+         <lastmod>2026-02-17</lastmod>
     </url>
 </urlset>
