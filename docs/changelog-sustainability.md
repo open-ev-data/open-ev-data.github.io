@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commits](https://www.conventionalcommits.org/).
 
+## [1.1.0](https://github.com/open-ev-data/open-ev-data-sustainability/compare/v1.0.0...v1.1.0) (2026-10-12)
+
+### Features
+
+* **readme:** adjust readme information that is ui ([b89ae0f](https://github.com/open-ev-data/open-ev-data-sustainability/commit/b89ae0f867ef8a6036f320fc91d61d6fa1585f81))
+
 ## 1.0.0 (2026-10-12)
 
 ### Features
