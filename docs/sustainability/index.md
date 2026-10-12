@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/open-ev-data/.github/bd1f96d4c236e7c1dc43a33535fc9f065f9b152e/assets/open-ev-data-logo.svg" alt="OpenEV Data Logo" width="200" />
 </div>
 
-# OpenEV Data Sustainability
+# OpenEV Data Sustainability UI
 
 > Turn electric vehicle specifications into real-world energy use: consumption, charging time, running costs and energy technologies.
 
