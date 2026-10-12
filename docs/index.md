@@ -53,6 +53,10 @@ OpenEV Data develops and maintains the world's most accurate open database of El
     
     Visualize, search, and compare electric vehicle specifications
 
+-   [**OpenEV Data Sustainability →**](https://open-ev-data.github.io/open-ev-data-sustainability/)
+    
+    Estimate energy consumption, charging time, and running costs of any EV
+
 -   [**Get Started →**](getting-started/index.md)
     
     Learn how to use the dataset or API
@@ -68,6 +72,10 @@ OpenEV Data develops and maintains the world's most accurate open database of El
 -   [**Dataset Documentation →**](dataset/index.md)
     
     Learn about the EV dataset structure
+
+-   [**Sustainability Documentation →**](sustainability/index.md)
+    
+    Understand how consumption, charging, and cost are calculated
 
 -   [**Contribute →**](guides/contributing.md)
     

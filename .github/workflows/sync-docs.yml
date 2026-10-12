@@ -6,6 +6,7 @@ on:
       - sync-api-docs
       - sync-dataset-docs
       - sync-governance-docs
+      - sync-sustainability-docs
   workflow_dispatch:
     inputs:
       source:
@@ -18,6 +19,7 @@ on:
           - dataset
           - governance
           - ui
+          - sustainability
       ref:
         description: "Git ref (branch/tag/commit) to sync from"
         required: false
@@ -53,7 +55,7 @@ jobs:
           if [ "$INPUT_SOURCE" == "all" ]; then
               # Create matrix for all repositories
               # Using minified JSON for matrix output
-              echo "matrix={\"include\":[{\"source\":\"api\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"dataset\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"governance\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"ui\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"}]}" >> $GITHUB_OUTPUT
+              echo "matrix={\"include\":[{\"source\":\"api\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"dataset\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"governance\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"ui\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"},{\"source\":\"sustainability\",\"ref\":\"$INPUT_REF\",\"sha\":\"\"}]}" >> $GITHUB_OUTPUT
           else
               # Single repository
               echo "matrix={\"include\":[{\"source\":\"$INPUT_SOURCE\",\"ref\":\"$INPUT_REF\",\"sha\":\"$SHA_VAL\"}]}" >> $GITHUB_OUTPUT
@@ -187,6 +189,30 @@ jobs:
           cp source-repo/docs/UI_COMPONENTS.md docs/ui/
 
           cp source-repo/CHANGELOG.md docs/changelog-ui.md
+
+      - name: Sync Sustainability Documentation
+        if: steps.source.outputs.source == 'sustainability'
+        run: |
+          mkdir -p docs/sustainability
+
+          # The README is the overview; rewrite its repository-relative links for the site
+          cp source-repo/README.md docs/sustainability/index.md
+          sed -i \
+            -e 's#](docs/#](#g' \
+            -e 's#](LICENSE)#](https://github.com/open-ev-data/open-ev-data-sustainability/blob/main/LICENSE)#g' \
+            docs/sustainability/index.md
+
+          cp source-repo/docs/GET_STARTED.md docs/sustainability/
+          cp source-repo/docs/ARCHITECTURE.md docs/sustainability/
+          cp source-repo/docs/CALCULATIONS.md docs/sustainability/
+          cp source-repo/docs/DEPLOYMENT.md docs/sustainability/
+
+          # CHANGELOG.md only exists after the first release
+          if [ -f source-repo/CHANGELOG.md ]; then
+            cp source-repo/CHANGELOG.md docs/changelog-sustainability.md
+          else
+            echo "No CHANGELOG.md yet; keeping the existing changelog page"
+          fi
 
       - name: Commit and Push Changes
         run: |

@@ -171,9 +171,16 @@ nav:
       - Page Layouts: ui/PAGE_LAYOUTS.md
       - Responsive Strategy: ui/RESPONSIVE_STRATEGY.md
       - SEO Strategy: ui/SEO_STRATEGY.md
+  - Sustainability Documentation:
+      - Overview: sustainability/index.md
+      - Get Started: sustainability/GET_STARTED.md
+      - Architecture: sustainability/ARCHITECTURE.md
+      - Calculations: sustainability/CALCULATIONS.md
+      - Deployment: sustainability/DEPLOYMENT.md
   - Changelog:
       - API Changelog: changelog-api.md
       - Dataset Changelog: changelog-dataset.md
       - UI Changelog: changelog-ui.md
+      - Sustainability Changelog: changelog-sustainability.md
   - Guides:
       - Contributing: guides/contributing.md
